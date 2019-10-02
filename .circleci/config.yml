@@ -11,7 +11,7 @@ jobs:
       - run:
           command: npm start
           background: true
-      - run: sleep 10
+      - run: sleep 5
       - save_cache:
           key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
