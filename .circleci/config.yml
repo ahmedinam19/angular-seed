@@ -16,4 +16,5 @@ jobs:
       - run:
           command: npm start
           background: true
+      - run: sleep 15
       - run: npm run protractor
