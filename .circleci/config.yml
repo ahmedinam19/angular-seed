@@ -13,5 +13,6 @@ jobs:
           key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - "node_modules"
-      - run: npm start &
+      - run: npm start
+          background: true
       - run: npm run protractor
