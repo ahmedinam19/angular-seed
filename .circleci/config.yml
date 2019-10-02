@@ -1,20 +1,19 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/PillsyApp/PillsyEnterpriseWebApp
+    working_directory: ~/AngularCircleCI
     docker:
       - image: circleci/node:8-browsers
     steps:
       - checkout
       - restore_cache:
           key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
-      - run: npm install
+      - run:
+          command: npm start
+          background: true
+        - run: sleep 10
       - save_cache:
           key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - "node_modules"
-      - run:
-          command: npm start
-          background: true
-      - run: sleep 15
       - run: npm run protractor
