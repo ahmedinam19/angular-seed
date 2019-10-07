@@ -4,14 +4,12 @@ jobs:
     working_directory: ~/AngularCircleCI
     parallelism: 1
     shell: /bin/bash --login
-    environment:
-      CIRCLE_ARTIFACTS: ~/AngularCircleCI/tmp/circleci-artifacts
-      CIRCLE_TEST_REPORTS: ~/AngularCircleCI/tmp/circleci-test-results
     docker:
           - image: circleci/node:8-browsers
     steps:
       - checkout
-      - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
+      - run: mkdir -p /home/circleci/AngularCircleCI/tmp/circleci-artifacts
+      - run: mkdir -p /home/circleci/AngularCircleCI/tmp/circleci-test-results
       - run: ls *
       - restore_cache:
           key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
@@ -25,6 +23,6 @@ jobs:
             - "node_modules"
       - run: npm run protractor
       - store_test_results:
-           path: ~/AngularCircleCI/tmp/circleci-test-results
+           path: /home/circleci/AngularCircleCI/tmp/circleci-test-results
       - store_artifacts:
-           path: ~/AngularCircleCI/tmp/circleci-test-results
+           path: /home/circleci/AngularCircleCI/tmp/circleci-test-results
