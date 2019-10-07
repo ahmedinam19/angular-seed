@@ -8,8 +8,8 @@ jobs:
           - image: circleci/node:8-browsers
     steps:
       - checkout
-      - run: mkdir -p /tmp/circleci-artifacts
-      - run: mkdir -p /tmp/circleci-test-results
+      - run: mkdir -p ~/AngularCircleCI/circleci-artifacts
+      - run: mkdir -p ~/AngularCircleCI/circleci-test-results
       - run: ls *
       - restore_cache:
           key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
@@ -23,6 +23,6 @@ jobs:
             - "node_modules"
       - run: npm run protractor
       - store_test_results:
-           path: /tmp/circleci-test-results
+           path: ~/AngularCircleCI/circleci-test-results
       - store_artifacts:
-           path: /tmp/circleci-test-results
+           path: ~/AngularCircleCI/circleci-test-results
