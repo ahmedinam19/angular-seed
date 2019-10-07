@@ -5,11 +5,14 @@ jobs:
     parallelism: 1
     shell: /bin/bash --login
     docker:
-          - image: circleci/node:8-browsers
+          - image: buildpack-deps:bionic
     steps:
       - checkout
       - run: mkdir -p ~/AngularCircleCI/circleci-artifacts
       - run: mkdir -p ~/AngularCircleCI/circleci-test-results
+      - run:
+          working_directory: ~/AngularCircleCI
+          command: 'curl -sL https://deb.nodesource.com/setup_8.x | bash -; apt-get install -y nodejs; nodejs --version; '
       - restore_cache:
           key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
@@ -23,6 +26,5 @@ jobs:
       - run: npm run protractor
       - store_test_results:
            path: ~/AngularCircleCI/circleci-test-results
-      - run: ls *
       - store_artifacts:
            path: ~/AngularCircleCI/circleci-test-results
