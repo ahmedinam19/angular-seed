@@ -3,10 +3,10 @@ jobs:
   build:
     working_directory: ~/AngularCircleCI
     parallelism: 1
+    shell: /bin/bash --login
     environment:
       CIRCLE_ARTIFACTS: ~/AngularCircleCI/tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: ~/AngularCircleCI/tmp/circleci-test-results
-      PROTRACTOR_FILE: $CIRCLE_TEST_REPORTS/protractor/test-results.xml
     docker:
           - image: circleci/node:8-browsers
     steps:
